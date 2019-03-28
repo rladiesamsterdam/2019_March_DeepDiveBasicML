@@ -10,7 +10,7 @@ tryCatch({
 
 # Read in the Data --------------------------------------------------------
 # change this to be appropriate for your use case
-filepath <- '~/git_tree/misc/RLadies_ML_workshop/data.RData'
+filepath <- '~/ml_data.RData'
 df <- readRDS(file = filepath)
 
 
@@ -113,14 +113,14 @@ abline(a = 0, b = 1)
 model_rf <- randomForest(formula = core_topic ~ .,
              data = train, trees = 1000)
 
-predict_rf <- predict(model_rf, type = 'response', newdata = df6)
+predict_rf <- predict(model_rf, type = 'response', newdata = test)
 
 
 # Step 8: compare predictions -----------------------------------------------------
 
-glm_predictions <- ifelse(predict_glm1 > .6, 1, 0)
-rf_predicitons <- as.numeric(predict_rf0 == 1)
-actual_results <- as.numeric(df6$core_topic == 1)
+glm_predictions <- ifelse(predict_glm > .6, 1, 0)
+rf_predicitons <- as.numeric(predict_rf == 1)
+actual_results <- as.numeric(test$core_topic == 1)
 
 results <- cbind(actual_results, glm_predictions, rf_predicitons)
 
